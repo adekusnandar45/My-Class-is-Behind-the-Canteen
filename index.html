@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Class is Behind the Canteen - Belajar B.Inggris Kelas 3</title>
+    <style>
+        /* CSS Variabel */
+        :root {
+            --primary-navy: #1E3A8A;
+            --primary-blue: #3B82F6;
+            --secondary-blue: #93C5FD;
+            --accent-yellow: #FBBF24;
+            --hero-pink: #FBCFE8;
+            --hero-pink-dark: #F472B6;
+            --bg-light: #F3F4F6;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --danger: #EF4444;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-main);
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 { color: var(--primary-navy); }
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 0.5rem; } .mt-2 { margin-top: 1rem; } .mt-4 { margin-top: 2rem; }
+        .mb-2 { margin-bottom: 1rem; } .mb-4 { margin-bottom: 2rem; }
+        .p-4 { padding: 1rem; } .p-6 { padding: 1.5rem; }
+
+        /* UI Components */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-primary:hover { background-color: var(--primary-navy); }
+
+        .btn-secondary {
+            background-color: var(--accent-yellow);
+            color: var(--text-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-size: 1rem;
+        }
+        .btn-secondary:hover { background-color: #F59E0B; }
+
+        /* Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* Top Navigation (Sticky) */
+        header {
+            background-color: var(--primary-navy);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            color: var(--accent-yellow);
+            font-size: 1.25rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-link {
+            background: none;
+            color: var(--white);
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .control-btn:hover { background: rgba(255,255,255,0.3); }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            background: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { flex-wrap: wrap; }
+            .hamburger { display: block; }
+            nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                margin-top: 10px;
+                background-color: var(--primary-navy);
+            }
+            nav.show { display: flex; }
+            .nav-link { text-align: left; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .controls { margin-left: auto; }
+        }
+
+        /* Sections */
+        section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- BERANDA --- */
+        .hero {
+            background-color: var(--hero-pink);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid var(--hero-pink-dark);
+        }
+
+        .hero h1 { color: var(--primary-navy); font-size: 2rem; margin-bottom: 1rem; z-index: 2;}
+        .hero p { color: #831843; font-size: 1.1rem; margin-bottom: 1.5rem; z-index: 2;}
+        .hero .hero-bg-shape {
+            position: absolute; background: white; opacity: 0.3; border-radius: 50%;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #E5E7EB;
+            border-radius: var(--radius-full);
+            height: 20px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .badge-container { display: flex; gap: 10px; justify-content: center; margin-top: 15px;}
+        .badge {
+            background: var(--accent-yellow); color: var(--primary-navy);
+            padding: 5px 15px; border-radius: var(--radius-full); font-weight: bold; font-size: 0.8rem;
+            display: none; /* hidden by default */
+        }
+        .badge.earned { display: inline-block; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+        @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+
+        /* --- MATERI --- */
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            height: 250px;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+        .flashcard {
+            width: 100%; height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        .flashcard.flipped { transform: rotateY(180deg); }
+        .fc-face {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 20px;
+            text-align: center;
+        }
+        .fc-front { background-color: var(--secondary-blue); color: var(--primary-navy); }
+        .fc-back { background-color: var(--accent-yellow); color: var(--primary-navy); transform: rotateY(180deg); }
+        .fc-word { font-size: 2rem; font-weight: bold; margin-bottom: 10px;}
+        .fc-meaning { font-size: 1.2rem; }
+
+        .fc-controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+
+        .simulation-area {
+            background: #E5E7EB; border-radius: var(--radius-md); padding: 20px;
+            position: relative; height: 200px; display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+        }
+        .sim-box {
+            padding: 15px 25px; border-radius: 8px; font-weight: bold; position: absolute;
+            transition: all 0.5s ease; box-shadow: var(--shadow-sm);
+        }
+        #sim-canteen { background: var(--primary-blue); color: white; z-index: 2; }
+        #sim-class { background: var(--accent-yellow); color: var(--primary-navy); z-index: 1; }
+        .sim-controls { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 15px;}
+
+        /* --- CONTOH SOAL --- */
+        .example-box {
+            border-left: 5px solid var(--primary-blue);
+            background: #EFF6FF;
+            padding: 15px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-bottom: 15px;
+        }
+
+        /* --- KUIS --- */
+        #quiz-setup { text-align: center; }
+        .input-group { margin-bottom: 15px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .input-group input {
+            width: 100%; padding: 10px; border: 2px solid #D1D5DB; border-radius: var(--radius-md);
+            font-size: 1rem;
+        }
+        .input-group input:focus { border-color: var(--primary-blue); outline: none; }
+
+        .quiz-layout {
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        @media (min-width: 768px) { .quiz-layout { flex-direction: row; } }
+        
+        .passage-box {
+            flex: 1; background: #FFFBEB; border: 2px dashed var(--accent-yellow);
+            padding: 15px; border-radius: var(--radius-md);
+            font-size: 1.1rem;
+        }
+        .question-box { flex: 1.2; }
+
+        .option-btn {
+            display: block; width: 100%; text-align: left; padding: 12px 20px;
+            margin-bottom: 10px; background: var(--white); border: 2px solid #E5E7EB;
+            border-radius: var(--radius-md); font-size: 1rem; transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) { border-color: var(--primary-blue); background: #EFF6FF; }
+        .option-btn.selected { border-color: var(--primary-navy); background: var(--primary-blue); color: white; }
+        .option-btn.correct { border-color: var(--success); background: #D1FAE5; color: #065F46; }
+        .option-btn.wrong { border-color: var(--danger); background: #FEE2E2; color: #991B1B; }
+
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .question-nav { display: flex; justify-content: space-between; margin-top: 20px; }
+
+        /* --- HASIL SKOR --- */
+        .certificate {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            border: 10px solid var(--primary-navy);
+            border-radius: 0; /* Traditional certificate look */
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            outline: 2px solid var(--accent-yellow);
+            outline-offset: -15px;
+        }
+        .cert-title { font-size: 2.5rem; color: var(--primary-navy); font-family: 'Times New Roman', serif; margin-bottom: 10px;}
+        .cert-name { font-size: 2rem; color: var(--primary-blue); font-weight: bold; border-bottom: 2px solid var(--text-dark); display: inline-block; min-width: 200px; margin: 15px 0;}
+        .cert-score { font-size: 3rem; color: var(--success); font-weight: bold; margin: 20px 0; text-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
+        
+        .chart-container { margin-top: 30px; width: 100%; height: 250px; background: white; padding: 10px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm);}
+        canvas { width: 100%; height: 100%; }
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 20px; color: var(--text-light); font-size: 0.9rem; margin-top: 40px; }
+
+        /* Accessibility Utilities */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Elements (BGM) -->
+    <!-- Menggunakan file audio public domain/free yang ringan. Jika tidak bisa load, akan tetap berjalan tanpa error -->
+    <audio id="bgm" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-happy-times-158.mp3" type="audio/mpeg">
+    </audio>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                EngClass III
+            </div>
+            <button class="hamburger" id="btn-menu" aria-label="Toggle Menu">☰</button>
+            <nav id="main-nav">
+                <button class="nav-link active" data-target="beranda">1. Beranda</button>
+                <button class="nav-link" data-target="materi">2. Materi</button>
+                <button class="nav-link" data-target="contoh-soal">3. Contoh Soal</button>
+                <button class="nav-link" data-target="kuis">4. Kuis</button>
+                <button class="nav-link" data-target="hasil">5. Hasil Skor</button>
+                <button class="nav-link" data-target="pengembang">6. Pengembang</button>
+            </nav>
+            <div class="controls">
+                <button class="control-btn" id="btn-audio" title="Mute/Unmute BGM">🔊</button>
+                <button class="control-btn" id="btn-fullscreen" title="Fullscreen">⛶</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="app-content">
+        
+        <!-- ================= SECTION 1: BERANDA ================= -->
+        <section id="beranda" class="active">
+            <div class="hero mb-4">
+                <div class="hero-bg-shape" style="width: 150px; height: 150px; top: -50px; left: -50px;"></div>
+                <div class="hero-bg-shape" style="width: 100px; height: 100px; bottom: 20px; right: 20px;"></div>
+                <h1>Welcome to English Class!</h1>
+                <p>Materi: <strong>My Class is Behind the Canteen</strong><br>(Prepositions of Place)</p>
+                <button class="btn-primary" onclick="navigateTo('materi')">🚀 Mulai Belajar</button>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>📊 Dashboard Kemajuan Siswa</h3>
+                    <p class="mt-1">Progress Belajarmu:</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="overall-progress" style="width: 0%;"></div>
+                    </div>
+                    <p class="text-center mt-1" id="progress-text">0% Selesai</p>
+                    
+                    <div class="badge-container" id="badges-area">
+                        <div class="badge" id="badge-materi">📖 Rajin Membaca</div>
+                        <div class="badge" id="badge-kuis">🏆 Juara Kuis</div>
+                    </div>
+                </div>
+
+                <div class="card text-center">
+                    <h3>Gambar Ilustrasi</h3>
+                    <div style="background: var(--bg-light); border-radius: var(--radius-md); padding: 20px; margin-top: 10px; border: 2px dashed var(--secondary-blue);">
+                        <!-- Inline SVG Placeholder for "My Class is Behind the Canteen" -->
+                        <svg width="100%" height="120" viewBox="0 0 200 100">
+                            <!-- Canteen -->
+                            <rect x="20" y="40" width="60" height="50" fill="#3B82F6" rx="4"/>
+                            <text x="50" y="70" font-family="Arial" font-size="10" fill="white" text-anchor="middle">CANTEEN</text>
+                            
+                            <!-- Class (Behind) -->
+                            <rect x="100" y="20" width="80" height="40" fill="#FBBF24" rx="4"/>
+                            <text x="140" y="45" font-family="Arial" font-size="10" fill="#1E3A8A" text-anchor="middle">MY CLASS</text>
+                            
+                            <!-- Arrow indicating 'Behind' -->
+                            <path d="M 140 65 Q 140 80 85 80" fill="none" stroke="#EF4444" stroke-width="2" stroke-dasharray="4"/>
+                            <polygon points="85,80 90,75 90,85" fill="#EF4444"/>
+                        </svg>
+                        <p class="mt-1"><i>Ilustrasi Posisi Ruangan</i></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 2: MATERI ================= -->
+        <section id="materi">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Modul Pembelajaran: Prepositions of Place</h2>
+                    <button class="btn-secondary" onclick="speakText('Materi ini dirancang untuk membantumu mengenali, memahami, dan mengaplikasikan kata depan tempat dalam komunikasi sehari-hari.')" title="Dengarkan Pengantar">🎧 Dengarkan</button>
+                </div>
+                
+                <p class="mt-2">Materi ini dirancang untuk membantumu mengenali, memahami, dan mengaplikasikan kata depan tempat (Preposisi Tempat) dalam komunikasi sehari-hari serta memberikan petunjuk arah.</p>
+
+                <h3 class="mt-4">1. Mengenal Preposisi Tempat</h3>
+                <p>Preposisi tempat adalah kata yang menjelaskan lokasi suatu benda atau orang.</p>
+                
+                <!-- Flashcards Interaktif -->
+                <div class="flashcard-container" id="fc-container" onclick="toggleFlashcard()">
+                    <div class="flashcard" id="fc-card">
+                        <div class="fc-face fc-front">
+                            <div class="fc-word" id="fc-en">Next to / Beside</div>
+                            <div class="text-sm">(Klik untuk melihat arti)</div>
+                        </div>
+                        <div class="fc-face fc-back">
+                            <div class="fc-meaning" id="fc-id">Di samping</div>
+                            <div class="mt-2" id="fc-example" style="font-size: 0.9rem; font-style: italic;">The table is next to the sofa.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fc-controls">
+                    <button class="btn-primary" onclick="prevFlashcard()">⬅️ Sebelumnya</button>
+                    <button class="btn-secondary" onclick="playFlashcardAudio()">🔊 Bunyikan</button>
+                    <button class="btn-primary" onclick="nextFlashcard()">Selanjutnya ➡️</button>
+                </div>
+
+                <h3 class="mt-4">2. Memahami Makna (Kontekstualisasi)</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Posisi Statis:</strong> <i>Next to, behind, in front of</i>, dan <i>between</i> menunjukkan hubungan posisi tetap antara dua benda.</li>
+                    <li><strong>Posisi Kontak:</strong> <i>Against</i> menekankan adanya sentuhan fisik (misal: "The painting is against the wall").</li>
+                    <li><strong>Posisi Transisi:</strong> <i>Across</i> menunjukkan jarak yang memisahkan, mengharuskan kita "menyeberang".</li>
+                </ul>
+
+                <h3 class="mt-4">3. Mode Eksplorasi: Mini Simulasi</h3>
+                <p>Tekan tombol di bawah untuk melihat perubahan posisi "My Class" (Kelas Kuning) terhadap "Canteen" (Kantin Biru).</p>
+                <div class="simulation-area">
+                    <div class="sim-box" id="sim-canteen" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">CANTEEN</div>
+                    <div class="sim-box" id="sim-class" style="top: 20%; left: 50%; transform: translate(-50%, -50%);">MY CLASS</div>
+                </div>
+                <div class="sim-controls">
+                    <button class="btn-secondary" onclick="moveSim('behind')">Behind (Di Belakang)</button>
+                    <button class="btn-secondary" onclick="moveSim('next-to')">Next to (Di Samping)</button>
+                    <button class="btn-secondary" onclick="moveSim('in-front-of')">In front of (Di Depan)</button>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <button class="btn-primary" onclick="markMateriDone()">Selesai Membaca & Lanjut Contoh Soal</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 3: CONTOH SOAL ================= -->
+        <section id="contoh-soal">
+            <div class="card">
+                <h2>Contoh Soal & Pembahasan</h2>
+                <p class="mb-4">Perhatikan 4 contoh soal berikut sebelum kamu memulai kuis!</p>
+
+                <div class="example-box">
+                    <h4>Contoh 1</h4>
+                    <p><strong>Soal:</strong> Where is the whiteboard usually located in a classroom?</p>
+                    <p>a. Behind the students<br>b. Next to the door<br>c. In front of the classroom<br>d. Between the windows</p>
+                    <p class="mt-1" style="color: var(--success);"><strong>Jawaban: C</strong> (Di depan ruang kelas). Papan tulis biasanya berada di depan agar semua siswa bisa melihat.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Contoh 2</h4>
+                    <p><strong>Soal:</strong> The library is located ... the laboratory and the principal's office.</p>
+                    <p>a. between<br>b. across<br>c. against<br>d. next to</p>
+                    <p class="mt-1" style="color: var(--success);"><strong>Jawaban: A</strong> (Di antara). Karena ada dua tempat yang disebutkan (lab dan ruang kepsek), kata depan yang tepat adalah <i>between</i>.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Contoh 3</h4>
+                    <p><strong>Soal:</strong> "My Class is Behind the Canteen". Kata <i>Behind</i> artinya...</p>
+                    <p>a. Di depan<br>b. Di seberang<br>c. Di samping<br>d. Di belakang</p>
+                    <p class="mt-1" style="color: var(--success);"><strong>Jawaban: D</strong> (Di belakang).</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Contoh 4</h4>
+                    <p><strong>Soal:</strong> Look at the picture in your mind: You park your bicycle touching the school wall. Your bicycle is ... the wall.</p>
+                    <p>a. behind<br>b. against<br>c. under<br>d. across</p>
+                    <p class="mt-1" style="color: var(--success);"><strong>Jawaban: B</strong> (Bersandar/menempel pada). <i>Against</i> digunakan ketika ada kontak fisik.</p>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button class="btn-primary" onclick="navigateTo('kuis')">Siap Untuk Kuis!</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 4: KUIS ================= -->
+        <section id="kuis">
+            <div class="card" id="quiz-setup">
+                <h2>Persiapan Kuis</h2>
+                <p class="mb-4">Kuis ini terdiri dari 40 soal pilihan ganda berdasarkan bacaan. Kerjakan dengan teliti!</p>
+                
+                <div style="max-width: 400px; margin: 0 auto;">
+                    <div class="input-group">
+                        <label for="student-name">Nama Lengkap:</label>
+                        <input type="text" id="student-name" placeholder="Masukkan nama kamu...">
+                    </div>
+                    <div class="input-group">
+                        <label for="student-class">Kelas:</label>
+                        <input type="text" id="student-class" placeholder="Contoh: III A" value="III">
+                    </div>
+                    <button class="btn-primary" onclick="startQuiz()" style="width: 100%; margin-top: 10px;">Mulai Kuis</button>
+                </div>
+            </div>
+
+            <div class="card" id="quiz-area" style="display: none;">
+                <div class="quiz-header">
+                    <h3 id="q-counter">Soal 1 / 40</h3>
+                    <div style="background: var(--bg-light); padding: 5px 15px; border-radius: var(--radius-full); font-weight: bold;">
+                        Skor: <span id="q-score">0</span>
+                    </div>
+                </div>
+                
+                <div class="progress-container mb-4" style="height: 10px;">
+                    <div class="progress-bar" id="quiz-progress" style="width: 2.5%; background: var(--primary-blue);"></div>
+                </div>
+
+                <div class="quiz-layout">
+                    <div class="passage-box">
+                        <h4 style="color: var(--accent-yellow); margin-bottom: 10px;">📖 Bacaan:</h4>
+                        <div id="q-passage">Teks bacaan akan muncul di sini.</div>
+                    </div>
+                    
+                    <div class="question-box">
+                        <h3 id="q-text" class="mb-2">Pertanyaan?</h3>
+                        <div id="q-options">
+                            <!-- Options generated dynamically -->
+                        </div>
+                        
+                        <div id="q-feedback" class="mt-2" style="font-weight: bold; min-height: 24px;"></div>
+
+                        <div class="question-nav">
+                            <button class="btn-secondary" id="btn-next-q" onclick="nextQuestion()" disabled>Selanjutnya ➡️</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 5: HASIL SKOR ================= -->
+        <section id="hasil">
+            <div class="card">
+                <div id="cert-area" class="certificate">
+                    <div class="cert-title">Sertifikat Penghargaan</div>
+                    <p>Diberikan kepada:</p>
+                    <div class="cert-name" id="cert-student-name">Nama Siswa</div>
+                    <p>Atas keberhasilannya menyelesaikan Kuis Bahasa Inggris<br>Materi "My Class is Behind the Canteen"</p>
+                    
+                    <div class="cert-score" id="cert-final-score">100</div>
+                    
+                    <p>Jumlah Benar: <strong id="cert-correct">40</strong> | Jumlah Salah: <strong id="cert-wrong">0</strong></p>
+                    
+                    <div style="margin-top: 30px; font-style: italic; color: var(--text-light);">
+                        Teruslah belajar dan raih mimpimu!
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button class="btn-primary" onclick="restartQuiz()">🔄 Ulangi Latihan</button>
+                </div>
+
+                <h3 class="mt-4">📈 Grafik Perkembangan Nilai</h3>
+                <p class="text-light text-sm">Lihat perkembangan nilaimu dari percobaan sebelumnya.</p>
+                <div class="chart-container">
+                    <canvas id="scoreChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 6: PENGEMBANG ================= -->
+        <section id="pengembang">
+            <div class="card text-center">
+                <h2>Tim Pengembang</h2>
+                <div style="width: 100px; height: 100px; background: var(--primary-navy); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 20px auto;">
+                    👩‍🏫
+                </div>
+                <h3>Bunda Ana</h3>
+                <p style="color: var(--primary-blue); font-weight: bold;">GURU Di Rumah</p>
+                
+                <div class="mt-4" style="background: var(--bg-light); padding: 15px; border-radius: var(--radius-md);">
+                    <h4>MEDIA PEMBELAJARAN B.Ing Sumatif 2</h4>
+                    <p>Kelas III Sekolah Dasar</p>
+                    <p>Materi: Prepositions of Place</p>
+                </div>
+                
+                <p class="mt-4" style="font-size: 0.9rem; color: var(--text-light);">
+                    Dibuat menggunakan HTML5, CSS3, dan Vanilla JavaScript.<br>
+                    Format Single Page Application (SPA).
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            &copy; 2026 GURU Di Rumah - Bunda Ana. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // --- 1. STATE & DATA ---
+        let state = {
+            currentSection: 'beranda',
+            progress: { materiDone: false, quizDone: false },
+            quizState: {
+                studentName: '', studentClass: '', currentQIndex: 0, 
+                score: 0, correctAnswers: 0, isAnswered: false,
+                history: JSON.parse(localStorage.getItem('quizHistory') || '[]')
+            },
+            audioEnabled: true
+        };
+
+        // Data Flashcard
+        const flashcards = [
+            { en: "Next to / Beside", id: "Di samping", ex: "The table is next to the sofa." },
+            { en: "Against", id: "Bersandar / Menempel pada", ex: "The painting is against the wall." },
+            { en: "Behind", id: "Di belakang", ex: "My Class is behind the canteen." },
+            { en: "In front of", id: "Di depan", ex: "The teacher stands in front of the class." },
+            { en: "Across", id: "Di seberang", ex: "My house is across the bank." },
+            { en: "Between", id: "Di antara", ex: "The ball is between the boxes." },
+            { en: "Near", id: "Dekat", ex: "The school is near the park." }
+        ];
+        let currentFcIndex = 0;
+
+        // Data Kuis (40 Soal digenerate berdasarkan pola bacaan)
+        // Array bacaan dan template soal untuk efisiensi baris kode
+        const passagesData = [
+            {
+                text: "My name is Nina. Now, I am in the library. The classroom is my favorite room. It is next to the library. There are many things in the classroom. There are tables and chairs. There is also a teacher’s table and chair.",
+                qs: [
+                    { q: "Where is Nina now?", opts: ["In the canteen", "In the library", "In the classroom", "In the laboratory"], a: 1 },
+                    { q: "Which room is Nina's favorite?", opts: ["The library", "The canteen", "The classroom", "The clinic"], a: 2 },
+                    { q: "Where is the classroom located?", opts: ["Behind the library", "Next to the library", "In front of the library", "Across the library"], a: 1 },
+                    { q: "What is inside the classroom?", opts: ["Books and shelves", "Microscopes", "Tables and chairs", "Food and drinks"], a: 2 }
+                ]
+            },
+            {
+                text: "My name is Adnan. Now, I am in the laboratory. My school’s laboratory is located behind the basketball court. There are microscopes, flasks, posters, and many more. I study science in this room.",
+                qs: [
+                    { q: "Where is Adnan now?", opts: ["In the library", "In the canteen", "In the laboratory", "In the classroom"], a: 2 },
+                    { q: "Where is the school’s laboratory located?", opts: ["Next to the canteen", "In front of the court", "Behind the basketball court", "Beside the library"], a: 2 },
+                    { q: "What does Adnan study in the laboratory?", opts: ["Math", "English", "History", "Science"], a: 3 },
+                    { q: "Which object is NOT mentioned in the text?", opts: ["Microscopes", "Flasks", "Posters", "Computers"], a: 3 }
+                ]
+            },
+            {
+                text: "My name is Roni. Now, I am in the school clinic. I am in the school clinic with my friend Yossi. I am feeling unwell. I get treatment in the school clinic. The school clinic is next to my class. There is a doctor. His name is Mr. Hendi. Mr. Hendi is kind and patient.",
+                qs: [
+                    { q: "Where is Roni now?", opts: ["In the class", "In the school clinic", "In the canteen", "In the library"], a: 1 },
+                    { q: "Who is with Roni?", opts: ["Mr. Hendi", "Nina", "Yossi", "Adnan"], a: 2 },
+                    { q: "Where is the school clinic?", opts: ["Next to Roni's class", "Behind the library", "In front of the canteen", "Across the park"], a: 0 },
+                    { q: "What is the name of the doctor?", opts: ["Mr. Yossi", "Mr. Hendi", "Mr. Adnan", "Mr. Roni"], a: 1 }
+                ]
+            },
+            {
+                text: "Hello, I am Siti. It is break time. I am in the canteen. The canteen is in front of the teachers' room. The students buy food and drinks here. The canteen is clean and big. The food is delicious.",
+                qs: [
+                    { q: "Where is Siti during break time?", opts: ["Teachers' room", "Canteen", "Library", "Clinic"], a: 1 },
+                    { q: "Where is the canteen located?", opts: ["Behind the class", "Next to the lab", "In front of the teachers' room", "Between the rooms"], a: 2 },
+                    { q: "What do the students do in the canteen?", opts: ["Read books", "Study science", "Buy food and drinks", "Play basketball"], a: 2 },
+                    { q: "How is the canteen described?", opts: ["Dirty and small", "Clean and big", "Dark and scary", "Quiet and empty"], a: 1 }
+                ]
+            },
+            {
+                text: "This is our school yard. It is very wide. The school yard is between the library and the principal's office. Every Monday morning, we have a flag ceremony here. We stand in lines facing the flagpole.",
+                qs: [
+                    { q: "What place is described in the text?", opts: ["School clinic", "School yard", "Library", "Principal's office"], a: 1 },
+                    { q: "Where is the school yard?", opts: ["Between library and office", "Next to the canteen", "Behind the class", "Across the street"], a: 0 },
+                    { q: "What activity is held every Monday morning?", opts: ["Sports competition", "Flag ceremony", "Reading books", "Eating food"], a: 1 },
+                    { q: "How is the school yard?", opts: ["Narrow", "Very wide", "Small", "Dirty"], a: 1 }
+                ]
+            },
+            {
+                text: "Look at the map of my school. The parking lot is near the school gate. The security post is next to the gate. My classroom, grade 3, is across the school yard.",
+                qs: [
+                    { q: "Where is the parking lot?", opts: ["Behind the canteen", "Near the school gate", "Next to the library", "In the classroom"], a: 1 },
+                    { q: "Where is the security post?", opts: ["Next to the gate", "Across the yard", "Between the rooms", "Behind the class"], a: 0 },
+                    { q: "Where is the grade 3 classroom?", opts: ["Near the gate", "Next to the post", "Across the school yard", "Behind the library"], a: 2 },
+                    { q: "What are we looking at in the text?", opts: ["A picture", "A map of the school", "A book", "A video"], a: 1 }
+                ]
+            },
+            {
+                text: "Ayo berlatih memberikan arah (Giving directions). \"Go straight, then turn left. The library is next to the laboratory.\"",
+                qs: [
+                    { q: "What should you do first based on the text?", opts: ["Turn right", "Go straight", "Stop", "Turn left"], a: 1 },
+                    { q: "What should you do after going straight?", opts: ["Turn right", "Go straight again", "Turn left", "Go back"], a: 2 },
+                    { q: "Where is the library located?", opts: ["Next to the laboratory", "Behind the class", "In front of the gate", "Across the yard"], a: 0 },
+                    { q: "The phrase 'Turn left' means...", opts: ["Belok kanan", "Jalan terus", "Belok kiri", "Berhenti"], a: 2 }
+                ]
+            },
+            {
+                text: "Let's review Prepositions! 'The apple is on the box. The cat is under the table. The bird is flying above the tree.'",
+                qs: [
+                    { q: "Where is the apple?", opts: ["In the box", "On the box", "Under the box", "Next to the box"], a: 1 },
+                    { q: "Where is the cat?", opts: ["On the table", "Behind the table", "Under the table", "Between the tables"], a: 2 },
+                    { q: "Where is the bird?", opts: ["Under the tree", "On the tree", "Above the tree", "Behind the tree"], a: 2 },
+                    { q: "The word 'Under' in Indonesian means...", opts: ["Di atas", "Di bawah", "Di samping", "Di belakang"], a: 1 }
+                ]
+            },
+            {
+                text: "Budi is looking for his bag. His mother says, 'Your bag is behind the sofa in the living room.' Budi goes to the living room and finds it.",
+                qs: [
+                    { q: "What is Budi looking for?", opts: ["His book", "His shoes", "His bag", "His ball"], a: 2 },
+                    { q: "Where is the bag according to mother?", opts: ["On the sofa", "Behind the sofa", "Under the sofa", "Next to the sofa"], a: 1 },
+                    { q: "In which room is the sofa?", opts: ["Bedroom", "Kitchen", "Bathroom", "Living room"], a: 3 },
+                    { q: "Did Budi find his bag?", opts: ["Yes, he did", "No, he didn't", "Maybe", "I don't know"], a: 0 }
+                ]
+            },
+            {
+                text: "The main topic is 'My Class is Behind the Canteen'. Imagine your school layout. The canteen is building A. Your class is building B. Building B is at the back of building A.",
+                qs: [
+                    { q: "What is the main topic?", opts: ["My class is big", "My class is next to library", "My Class is Behind the Canteen", "I love my school"], a: 2 },
+                    { q: "Which building is the canteen?", opts: ["Building A", "Building B", "Building C", "Building D"], a: 0 },
+                    { q: "Where is Building B located?", opts: ["In front of A", "At the back of A (Behind)", "Next to A", "Between A and C"], a: 1 },
+                    { q: "If you are in the canteen and want to go to your class, you should walk...", opts: ["Forward", "Backward / to the back", "To the left", "To the right"], a: 1 }
+                ]
+            }
+        ];
+
+        let quizQuestions = [];
+        // Generate exactly 40 questions from the 10 passages (4 qs each)
+        passagesData.forEach((p, pIndex) => {
+            p.qs.forEach((qItem) => {
+                quizQuestions.push({
+                    passage: p.text,
+                    question: qItem.q,
+                    options: qItem.opts,
+                    answer: qItem.a
+                });
+            });
+        });
+
+        // --- 2. AUDIO SYNTHESIZER (No external files needed for SFX) ---
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+            }
+        }
+
+        function playTone(freq, type, duration, vol=0.1) {
+            if (!state.audioEnabled) return;
+            initAudio();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.type = type;
+            oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            
+            gainNode.gain.setValueAtTime(vol, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + duration);
+        }
+
+        const sfx = {
+            click: () => playTone(600, 'sine', 0.1),
+            correct: () => { playTone(800, 'sine', 0.1); setTimeout(() => playTone(1200, 'sine', 0.2), 100); },
+            wrong: () => playTone(300, 'sawtooth', 0.3),
+            cheer: () => {
+                // Simple pseudo-chord for winning
+                playTone(523.25, 'triangle', 0.5); // C5
+                playTone(659.25, 'triangle', 0.5); // E5
+                playTone(783.99, 'triangle', 0.5); // G5
+            }
+        };
+
+        // --- 3. NAVIGATION LOGIC ---
+        function navigateTo(sectionId) {
+            sfx.click();
+            // Hide all sections
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+            // Show target section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update Nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('data-target') === sectionId) link.classList.add('active');
+            });
+
+            // Handle mobile menu close
+            document.getElementById('main-nav').classList.remove('show');
+            
+            state.currentSection = sectionId;
+            window.scrollTo(0, 0);
+
+            if(sectionId === 'hasil' && state.quizState.history.length > 0) {
+                drawChart();
+            }
+        }
+
+        // --- 4. BERANDA LOGIC ---
+        function updateProgressUI() {
+            let pct = 0;
+            if(state.progress.materiDone) pct += 50;
+            if(state.progress.quizDone) pct += 50;
+            
+            document.getElementById('overall-progress').style.width = `${pct}%`;
+            document.getElementById('progress-text').innerText = `${pct}% Selesai`;
+
+            if(state.progress.materiDone) document.getElementById('badge-materi').classList.add('earned');
+            if(state.progress.quizDone) document.getElementById('badge-kuis').classList.add('earned');
+        }
+
+        // --- 5. MATERI LOGIC ---
+        function renderFlashcard() {
+            const fc = flashcards[currentFcIndex];
+            document.getElementById('fc-en').innerText = fc.en;
+            document.getElementById('fc-id').innerText = fc.id;
+            document.getElementById('fc-example').innerText = fc.ex;
+            document.getElementById('fc-card').classList.remove('flipped');
+        }
+
+        function toggleFlashcard() {
+            document.getElementById('fc-card').classList.toggle('flipped');
+            sfx.click();
+        }
+
+        function nextFlashcard() {
+            sfx.click();
+            currentFcIndex = (currentFcIndex + 1) % flashcards.length;
+            renderFlashcard();
+        }
+
+        function prevFlashcard() {
+            sfx.click();
+            currentFcIndex = (currentFcIndex - 1 + flashcards.length) % flashcards.length;
+            renderFlashcard();
+        }
+
+        function playFlashcardAudio() {
+            const text = flashcards[currentFcIndex].en;
+            speakText(text, 'en-US');
+        }
+
+        function speakText(text, lang='id-ID') {
+            if('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function moveSim(pos) {
+            sfx.click();
+            const cl = document.getElementById('sim-class');
+            cl.style.transform = "translate(-50%, -50%)"; // reset
+            
+            if(pos === 'behind') {
+                cl.style.top = "20%"; cl.style.left = "50%";
+                cl.style.zIndex = "1";
+            } else if(pos === 'next-to') {
+                cl.style.top = "50%"; cl.style.left = "80%";
+                cl.style.zIndex = "3";
+            } else if(pos === 'in-front-of') {
+                cl.style.top = "80%"; cl.style.left = "50%";
+                cl.style.zIndex = "3";
+            }
+        }
+
+        function markMateriDone() {
+            state.progress.materiDone = true;
+            updateProgressUI();
+            navigateTo('contoh-soal');
+        }
+
+        // --- 6. KUIS LOGIC ---
+        function startQuiz() {
+            const name = document.getElementById('student-name').value.trim();
+            const cls = document.getElementById('student-class').value.trim();
+            
+            if(!name) { alert("Silakan masukkan namamu!"); return; }
+
+            state.quizState.studentName = name;
+            state.quizState.studentClass = cls;
+            state.quizState.currentQIndex = 0;
+            state.quizState.score = 0;
+            state.quizState.correctAnswers = 0;
+            
+            document.getElementById('quiz-setup').style.display = 'none';
+            document.getElementById('quiz-area').style.display = 'block';
+            sfx.click();
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const qIndex = state.quizState.currentQIndex;
+            const qData = quizQuestions[qIndex];
+            
+            state.quizState.isAnswered = false;
+            
+            // Update UI
+            document.getElementById('q-counter').innerText = `Soal ${qIndex + 1} / ${quizQuestions.length}`;
+            document.getElementById('q-score').innerText = state.quizState.score;
+            document.getElementById('quiz-progress').style.width = `${((qIndex) / quizQuestions.length) * 100}%`;
+            
+            document.getElementById('q-passage').innerText = qData.passage;
+            document.getElementById('q-text').innerText = qData.question;
+            
+            const optsContainer = document.getElementById('q-options');
+            optsContainer.innerHTML = '';
+            
+            const labels = ['A', 'B', 'C', 'D'];
+            qData.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<strong>${labels[idx]}.</strong> ${opt}`;
+                btn.onclick = () => selectAnswer(idx, btn);
+                optsContainer.appendChild(btn);
+            });
+            
+            document.getElementById('q-feedback').innerText = '';
+            document.getElementById('q-feedback').style.color = 'inherit';
+            document.getElementById('btn-next-q').disabled = true;
+            
+            // If it's a new passage (index mod 4 is 0), read the passage (optional, maybe too noisy. Let's just rely on text).
+        }
+
+        function selectAnswer(selectedIndex, btnElement) {
+            if(state.quizState.isAnswered) return;
+            state.quizState.isAnswered = true;
+            
+            const qData = quizQuestions[state.quizState.currentQIndex];
+            const isCorrect = (selectedIndex === qData.answer);
+            
+            // Disable all buttons
+            const btns = document.querySelectorAll('.option-btn');
+            btns.forEach(b => b.disabled = true);
+            
+            if(isCorrect) {
+                btnElement.classList.add('correct');
+                state.quizState.correctAnswers++;
+                // Score calc: 100 max, so 100/40 = 2.5 per question
+                state.quizState.score += 2.5; 
+                document.getElementById('q-feedback').innerText = "✅ Hebat! Jawabanmu Benar.";
+                document.getElementById('q-feedback').style.color = "var(--success)";
+                sfx.correct();
+            } else {
+                btnElement.classList.add('wrong');
+                // Highlight correct answer
+                btns[qData.answer].classList.add('correct');
+                document.getElementById('q-feedback').innerText = "❌ Ups, kurang tepat. Perhatikan jawaban yang benar berwarna hijau.";
+                document.getElementById('q-feedback').style.color = "var(--danger)";
+                sfx.wrong();
+            }
+            
+            document.getElementById('q-score').innerText = state.quizState.score;
+            
+            // Change Next button text if last question
+            const btnNext = document.getElementById('btn-next-q');
+            btnNext.disabled = false;
+            if(state.quizState.currentQIndex === quizQuestions.length - 1) {
+                btnNext.innerText = "Lihat Hasil 🏆";
+                btnNext.classList.remove('btn-secondary');
+                btnNext.classList.add('btn-primary');
+            } else {
+                btnNext.innerText = "Selanjutnya ➡️";
+            }
+        }
+
+        function nextQuestion() {
+            sfx.click();
+            if(state.quizState.currentQIndex < quizQuestions.length - 1) {
+                state.quizState.currentQIndex++;
+                renderQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            state.progress.quizDone = true;
+            updateProgressUI();
+            
+            // Save history
+            const finalScore = state.quizState.score;
+            const d = new Date();
+            state.quizState.history.push({
+                date: d.toLocaleDateString() + " " + d.getHours() + ":" + d.getMinutes(),
+                score: finalScore
+            });
+            localStorage.setItem('quizHistory', JSON.stringify(state.quizState.history));
+            
+            // Populate Certificate
+            document.getElementById('cert-student-name').innerText = state.quizState.studentName || "Siswa Teladan";
+            document.getElementById('cert-final-score').innerText = finalScore;
+            document.getElementById('cert-correct').innerText = state.quizState.correctAnswers;
+            document.getElementById('cert-wrong').innerText = quizQuestions.length - state.quizState.correctAnswers;
+            
+            sfx.cheer();
+            navigateTo('hasil');
+            
+            // Reset Quiz UI for next time
+            document.getElementById('quiz-setup').style.display = 'block';
+            document.getElementById('quiz-area').style.display = 'none';
+        }
+
+        function restartQuiz() {
+            navigateTo('kuis');
+        }
+
+        // --- 7. CHART ENGINE (Vanilla Canvas) ---
+        function drawChart() {
+            const canvas = document.getElementById('scoreChart');
+            const ctx = canvas.getContext('2d');
+            const history = state.quizState.history;
+            
+            if(history.length === 0) return;
+
+            // Setup dimensions
+            const p = 30; // padding
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Draw axes
+            ctx.beginPath();
+            ctx.moveTo(p, p); ctx.lineTo(p, h - p); ctx.lineTo(w - p, h - p);
+            ctx.strokeStyle = '#9CA3AF';
+            ctx.stroke();
+
+            // Y-axis labels (0 to 100)
+            ctx.fillStyle = '#6B7280';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'right';
+            for(let i=0; i<=5; i++) {
+                const y = h - p - (i/5)*(h - 2*p);
+                ctx.fillText(i*20, p - 5, y + 4);
+                // grid line
+                ctx.beginPath(); ctx.moveTo(p, y); ctx.lineTo(w-p, y);
+                ctx.strokeStyle = '#E5E7EB'; ctx.stroke();
+            }
+
+            // Draw data points
+            const dataToShow = history.slice(-10); // Show last 10
+            const step = (w - 2*p) / Math.max(dataToShow.length, 1);
+            
+            ctx.beginPath();
+            ctx.strokeStyle = '#3B82F6'; // var(--primary-blue)
+            ctx.lineWidth = 3;
+
+            dataToShow.forEach((entry, idx) => {
+                const x = p + (idx + 0.5) * step;
+                const y = (h - p) - (entry.score / 100) * (h - 2*p);
+                
+                if(idx === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // Draw points & labels
+            dataToShow.forEach((entry, idx) => {
+                const x = p + (idx + 0.5) * step;
+                const y = (h - p) - (entry.score / 100) * (h - 2*p);
+                
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, 2*Math.PI);
+                ctx.fillStyle = '#FBBF24'; // accent yellow
+                ctx.fill();
+                ctx.stroke();
+                
+                // Score label
+                ctx.fillStyle = '#1F2937';
+                ctx.textAlign = 'center';
+                ctx.fillText(entry.score, x, y - 10);
+                
+                // X label (try to format short)
+                ctx.font = '10px Arial';
+                ctx.fillStyle = '#6B7280';
+                ctx.fillText("Perc." + (history.length - dataToShow.length + idx + 1), x, h - p + 15);
+            });
+        }
+
+        // --- 8. EVENT LISTENERS & INIT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Setup Nav
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    navigateTo(e.target.getAttribute('data-target'));
+                });
+            });
+
+            // Hamburger
+            document.getElementById('btn-menu').addEventListener('click', () => {
+                document.getElementById('main-nav').classList.toggle('show');
+            });
+
+            // Audio Toggle
+            const bgm = document.getElementById('bgm');
+            const btnAudio = document.getElementById('btn-audio');
+            btnAudio.addEventListener('click', () => {
+                state.audioEnabled = !state.audioEnabled;
+                if(state.audioEnabled) {
+                    bgm.play().catch(e => console.log("BGM autoplay prevented"));
+                    btnAudio.innerText = '🔊';
+                    initAudio();
+                } else {
+                    bgm.pause();
+                    btnAudio.innerText = '🔇';
+                }
+            });
+
+            // Fullscreen
+            document.getElementById('btn-fullscreen').addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+
+            // Try play BGM on first interaction (browser policy)
+            document.body.addEventListener('click', () => {
+                if(state.audioEnabled && bgm.paused) {
+                    bgm.play().catch(e=>{});
+                    initAudio();
+                }
+            }, {once: true});
+
+            // Initial Renders
+            renderFlashcard();
+            updateProgressUI();
+            
+            // Handle window resize for chart
+            window.addEventListener('resize', () => {
+                if(state.currentSection === 'hasil') drawChart();
+            });
+        });
+
+    </script>
+</body>
+</html>
